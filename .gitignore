@@ -65,6 +65,9 @@ db.sqlite3-journal
 instance/
 .webassets-cache
 
+#secrets
+.streamlit/secrets.toml
+
 # Scrapy stuff:
 .scrapy
 
