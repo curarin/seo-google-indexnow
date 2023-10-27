@@ -4,8 +4,6 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import requests
 import time
-from bs4 import BeautifulSoup
-
 
 def indexnow_api_call():
     # Input field
