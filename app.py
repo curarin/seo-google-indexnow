@@ -7,8 +7,8 @@ import tabs.indexnow as indexnow
 import tabs.inspect_api as inspect_api
 
 st.set_page_config(
-    layout="wide",
-    page_title="Google Ping Tool | Paul Herzog",
+    layout="centered",
+    page_title="Google & Bing API Tool | Paul Herzog",
     initial_sidebar_state="expanded", #collapsed
     page_icon="🤖"
 )
@@ -59,7 +59,7 @@ if not check_password():
 ########################################################################
 # Main Streamlit app starts here
 tab1, tab2 = st.tabs([
-    "Google IndexNOW",
+    "Google & Bing IndexNOW |",
     "Google Indexing Status"
     ])
 
