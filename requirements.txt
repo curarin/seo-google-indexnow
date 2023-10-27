@@ -1,2 +1,4 @@
 streamlit
 google-oauth2-tool
+xlsxwriter
+requests
