@@ -123,7 +123,7 @@ def inspect_api_call():
                         df_inspect_data = pd.concat([df_inspect_data, df_for_appending], ignore_index=True)
             
                 except Exception as e:
-                    st.error(f"Error sending notification for URL {url}: {e}")
+                    st.error(f"Error receiving inspect data for URL {url}: {e}")
         status.update(label="Indexing Data successfully fetched from google.", state="complete", expanded=False)
             #### Implement Download button which caches the data
         if output_format_choosen == "Download as Table in Excel":
