@@ -1,5 +1,5 @@
-# seo-google-indexnow
- Streamlit App for IndexNOW Ping to Google
+# seo-google-bing-indexnow
+ Streamlit App for IndexNOW Ping to Google and Bing
 
  ## Why?
  In my Inhouse SEO Daily Business i often want to ping google and bing after small updates to a specific url, in order to get the fresh content get recrawled and indexed as soon as possible. Especially after bulk updates I don't want to ping google using the web UI due to its slowness.
