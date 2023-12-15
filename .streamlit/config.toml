@@ -2,3 +2,5 @@
 base="light"
 primaryColor="#0197af"
 
+[browser]
+gatherUsageStats = false
