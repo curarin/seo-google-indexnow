@@ -58,7 +58,8 @@ def inspect_api_call():
                             "pageFetchState",
                             "googleCanonical",
                             "userCanonical",
-                            "crawledAs"
+                            "crawledAs",
+                            "richResultsResult"
                         ]
     df_inspect_data = pd.DataFrame(columns=columns_for_inspect_df)
     if st.button("Get Inspect Data"):
@@ -80,6 +81,15 @@ def inspect_api_call():
                     googleCanonical = response["inspectionResult"]["indexStatusResult"]["googleCanonical"]
                     userCanonical = response["inspectionResult"]["indexStatusResult"]["userCanonical"]
                     crawledAs = response["inspectionResult"]["indexStatusResult"]["crawledAs"]
+                    richResults_verdict = response["inspectionResult"]["richResultsResult"]["verdict"]
+                    richResults_result_type = response["inspectionResult"]["richResultsResult"]["detectedItems"][0]["richResultType"]
+                    issue_messages = [issue["issueMessage"] for issue in response["inspectionResult"]["richResultsResult"]["detectedItems"][0]["items"][0]["issues"]]
+                    df_issues = pd.DataFrame(issue_messages, columns=["issueMessage"])
+                    df_result_type = pd.DataFrame({"richResultType": [richResults_result_type]})
+                    grouped_df_issues = df_issues.groupby("issueMessage").size().reset_index(name="count")
+                    first_issue_message_value = grouped_df_issues.loc[0, "issueMessage"]
+
+
                     if output_format_choosen == "Direct results, one by one":
                         st.subheader(url)
                         if coverageState in url_is_on_google:
@@ -105,6 +115,12 @@ def inspect_api_call():
                             st.write(userCanonical)
                             st.markdown("**Google Bot used for crawling**")
                             st.write(crawledAs)
+                            st.markdown("**Rich Result Test**")
+                            st.write(richResults_verdict)
+                            st.write(richResults_result_type)
+                            if richResults_verdict == "FAIL":
+                                st.write(df_result_type)
+                                st.write(grouped_df_issues)
                         st.divider()
                     if output_format_choosen == "Download as Table in Excel":
                         st.write(f"Fetching inspect data for {url}...")
@@ -117,7 +133,10 @@ def inspect_api_call():
                             "pageFetchState": [pageFetchState],
                             "googleCanonical": [googleCanonical],
                             "userCanonical": [userCanonical],
-                            "crawledAs": [crawledAs]                          
+                            "crawledAs": [crawledAs],      
+                            "richresult_verdict": [richResults_verdict],
+                            "richresult_items": [richResults_result_type],
+                            "richresult_issue_message": [first_issue_message_value]            
                         }
                         df_for_appending = pd.DataFrame(data_for_columns)
                         df_inspect_data = pd.concat([df_inspect_data, df_for_appending], ignore_index=True)
